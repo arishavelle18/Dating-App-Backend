@@ -52,3 +52,5 @@ group :development do
   gem 'faker'
 end
 
+gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'railties'
