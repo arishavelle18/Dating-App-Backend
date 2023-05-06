@@ -20,7 +20,7 @@ gem "puma", "~> 5.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
-
+gem 'bootstrap-sass'
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.7"
 
@@ -46,12 +46,12 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
-  gem 'graphiql-rails'
+ 
 
   # Seed data generator
   gem 'faker'
 end
-
+gem 'graphiql-rails'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'railties'
 
