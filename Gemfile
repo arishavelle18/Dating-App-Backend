@@ -54,3 +54,7 @@ end
 
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'railties'
+
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
