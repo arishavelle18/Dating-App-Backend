@@ -5,17 +5,41 @@ module Mutations
     argument :password, String, required: true
     argument :password_confirmation, String, required: true
     argument :email, String, required: true
-  
+    argument :birthdate, GraphQL::Types::ISO8601Date, required: false
+    argument :gender,Boolean, required: true
+    argument :gender_interest,Boolean, required: true
+    argument :country, String, required: true
+    argument :region, String, required: true
+    argument :city, String, required: true
+    argument :school, String, required: false
+    argument :images, [String], required: false
+
+
     field :user, Types::UserType, null: true
     field :errors, [String], null: false
   
-    def resolve(first_name:,last_name:, email:, password:, password_confirmation:)
-      user = User.new(first_name:first_name,last_name:last_name, email:email, password:password, password_confirmation:password_confirmation)
+    def resolve(first_name:, last_name:, email:, password:, password_confirmation:, birthdate:, gender:, gender_interest:, country:, region:, city:, school:,images:)
+      user = User.new(
+        first_name: first_name,
+        last_name: last_name, 
+        email: email,
+        password: password,
+        password_confirmation: password_confirmation,
+        birthdate: birthdate,
+        gender: gender,
+        gender_interest: gender_interest,
+        country: country,
+        region: region,
+        city: city,
+        school: school.presence ? school : nil,
+        images: images.presence ? {images: images}.to_json : nil
+      )
+    
       if user.save
         # Successful creation, return the created object with no errors
         {
           user: user,
-          errors: [],
+          errors: []
         }
       else
         # Failed save, return the errors to the client
@@ -24,5 +48,6 @@ module Mutations
         }
       end
     end
+    
   end
 end

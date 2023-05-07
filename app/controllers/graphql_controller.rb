@@ -9,8 +9,8 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
+      session: session,
+      current_user:current_user
     }
     result = DatingAppSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
@@ -20,6 +20,22 @@ class GraphqlController < ApplicationController
   end
 
   private
+
+  def current_user
+    return unless session[:token]
+    decoded_token = JWT.decode(session[:token], Rails.application.credentials.secret_key_base)
+    user_id = decoded_token.first['user_id']
+    User.find(user_id)
+  rescue JWT::DecodeError
+    nil
+  end
+  
+
+  def ensure_hash(ambiguous_param)
+    #..code
+  end
+
+
 
   # Handle variables in form data, JSON body, or a blank value
   def prepare_variables(variables_param)

@@ -44,9 +44,6 @@ gem 'graphql'
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-
- 
-
   # Seed data generator
   gem 'faker'
 end
@@ -54,3 +51,6 @@ gem 'graphiql-rails'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'railties'
 
+gem 'jwt'
+
+gem 'cloudinary'
