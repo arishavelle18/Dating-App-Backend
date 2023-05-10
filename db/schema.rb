@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_07_102642) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_09_153434) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "swipes", force: :cascade do |t|
+    t.bigint "swiped_by_id", null: false
+    t.bigint "swiped_user_id", null: false
+    t.string "status"
+    t.boolean "is_match"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["swiped_by_id"], name: "index_swipes_on_swiped_by_id"
+    t.index ["swiped_user_id"], name: "index_swipes_on_swiped_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
@@ -33,4 +44,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_07_102642) do
     t.boolean "gender_interest"
   end
 
+  add_foreign_key "swipes", "users", column: "swiped_by_id"
+  add_foreign_key "swipes", "users", column: "swiped_user_id"
 end

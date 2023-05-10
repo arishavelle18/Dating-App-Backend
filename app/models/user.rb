@@ -1,6 +1,7 @@
 class User < ApplicationRecord
     has_secure_password
-    
+    has_many :swipes_given, foreign_key: :swiped_by_id, class_name: 'Swipe', dependent: :destroy
+    has_many :swipes_received, foreign_key: :swiped_user_id, class_name: 'Swipe', dependent: :destroy
     # before saving the email
     before_save {self.email = email.downcase}
 

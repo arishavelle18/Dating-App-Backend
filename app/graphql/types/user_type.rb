@@ -17,6 +17,8 @@ module Types
     field :city, String, null: false
     field :school, String, null: true
     field :bio, String, null: false
+    field :swipes_given, [Types::SwipeType], null: false 
+    field :swipes_received, [Types::SwipeType], null: false
 
 
       def images

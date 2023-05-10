@@ -6,7 +6,7 @@ module Mutations
     #error
     field :errors, [String], null: false
     field :token, String, null: true
-
+    field :success,String, null: true
 
     def resolve(email:,password:)
       user = User.find_by(email: email)
@@ -17,7 +17,8 @@ module Mutations
         context[:session][:token] = token
         {
           token: token,
-          errors: []
+          errors: [],
+          success: "#{context[:current_user]}"
         }
       else
         {
